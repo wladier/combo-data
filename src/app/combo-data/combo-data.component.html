@@ -1,3 +1,49 @@
-<p>
-  combo-data works!
-</p>
+<ng-template
+  *ngIf="esFiltrable; then filtrable else noFiltrable">
+</ng-template>
+
+<ng-template #filtrable>
+  <ng-select
+    class="form-control input-lg"
+    [(ngModel)]="itemSelected"
+    (change)="onSelection(itemSelected)"
+    [items]="listado"
+    [typeahead]="typeahead"
+    placeholder="Buscar..."
+    typeToSearchText="Escribe para buscar"
+    notFoundText="No se han encontrado resultados"
+    loadingText="Cargando..."
+    id="comboFiltrable">
+    <ng-template ng-label-tmp let-item="item">
+      {{item.nombre}}
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item">
+      {{item.nombre}}
+    </ng-template>
+  </ng-select>
+</ng-template>
+
+
+<ng-template #noFiltrable>
+  <div>
+    <ng-select
+      class="form-control input-lg"
+      [(ngModel)]="itemSelected"
+      (change)="onSelection(itemSelected)"
+      [items]="listado"
+      bindLabel="nombre"
+      placeholder="Buscar..."
+      typeToSearchText="Escribe para buscar"
+      notFoundText="No se han encontrado resultados"
+      loadingText="Cargando..."
+      id="comboSimple">
+      <ng-template ng-label-tmp let-item="item">
+        {{item.nombre}}
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item">
+        {{item.nombre}}
+      </ng-template>
+    </ng-select>
+  </div>
+
+</ng-template>
